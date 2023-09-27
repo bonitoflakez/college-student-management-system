@@ -48,7 +48,7 @@ CREATE TABLE courses (
 
 CREATE TABLE roles (
   role_id INT PRIMARY KEY,
-  role_name VARCHAR(255),
+  role_name VARCHAR(255)
   -- number of users with a role
 );
 

@@ -19,12 +19,28 @@ async function main() {
       "utf8"
     );
 
-    await pool.query(insertDataScript);
+    const sqlStatements = insertDataScript.split(";");
+
+    for (let i = 0; i < sqlStatements.length; i++) {
+      const sqlStatement = sqlStatements[i].trim();
+      if (sqlStatement) {
+        try {
+          await pool.query(sqlStatement);
+        } catch (err) {
+          console.error(
+            `[!] Error executing SQL statement on line ${i + 1}: ${err.message}`
+          );
+          console.error(`Problematic SQL statement: ${sqlStatement}`);
+          return;
+        }
+      }
+    }
 
     console.log("[+] Database seeded.");
-    pool.end();
   } catch (err) {
     console.error("[!] Error while seeding:", err);
+  } finally {
+    pool.end();
   }
 }
 

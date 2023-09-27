@@ -19,12 +19,28 @@ async function main() {
       "utf8"
     );
 
-    await pool.query(createTablesScript);
+    const sqlStatements = createTablesScript.split(";");
+
+    for (let i = 0; i < sqlStatements.length; i++) {
+      const sqlStatement = sqlStatements[i].trim();
+      if (sqlStatement) {
+        try {
+          await pool.query(sqlStatement);
+        } catch (err) {
+          console.error(
+            `[!] Error executing SQL statement on line ${i + 1}: ${err.message}`
+          );
+          console.error(`Problematic SQL statement: ${sqlStatement}`);
+          return;
+        }
+      }
+    }
 
     console.log("[+] Tables created successfully.");
-    pool.end();
   } catch (err) {
     console.error("[!] Error initializing the database:", err);
+  } finally {
+    pool.end();
   }
 }
 
