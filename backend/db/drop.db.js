@@ -1,3 +1,5 @@
+// drop table admin_users, branches, courses, faculty, roles, student, student_attendance_info, student_course_info, student_grade_info, student_info, student_personal_info;
+
 import { Pool } from "pg";
 import fs from "fs/promises";
 import path from "path";
@@ -14,8 +16,9 @@ async function main() {
 
     const pool = new Pool(databaseConfig);
 
+
     const createTablesScript = await fs.readFile(
-      path.join(__dirname, "./schema/001_init_tables.sql"),
+      path.join(__dirname, "./schema/004_drop_tables.sql"),
       "utf8"
     );
 
@@ -36,7 +39,7 @@ async function main() {
       }
     }
 
-    console.log("[+] Tables created successfully.");
+    console.log("[+] Dropped tables successfully.");
     pool.end();
   } catch (err) {
     console.error("[!] Error initializing the database:", err);

@@ -46,6 +46,7 @@ async function main() {
     console.log(`[+] ${numPasses}/${testsToPass} queries passed`);
     console.log(`[+] ${numErrors}/${testsToFail} queries failed`);
     console.log(`[+] ${numPasses + numErrors}/${totalTests} tests passed`);
+    
     pool.end();
   } catch (err) {
     console.error("[!] Error initializing the database:", err);

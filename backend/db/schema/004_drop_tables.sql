@@ -1,0 +1,11 @@
+DROP TABLE admin_users,
+branches,
+courses,
+faculty,
+roles,
+student,
+student_attendance_info,
+student_course_info,
+student_grade_info,
+student_info,
+student_personal_info;

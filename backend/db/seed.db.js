@@ -37,10 +37,9 @@ async function main() {
     }
 
     console.log("[+] Database seeded.");
+    pool.end();
   } catch (err) {
     console.error("[!] Error while seeding:", err);
-  } finally {
-    pool.end();
   }
 }
 

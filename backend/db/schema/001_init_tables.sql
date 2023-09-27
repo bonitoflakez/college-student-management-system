@@ -1,3 +1,15 @@
+-- roles
+CREATE TABLE roles (
+  role_id INT PRIMARY KEY,
+  role_name VARCHAR(255)
+);
+
+-- branches
+CREATE TABLE branches (
+  branch_id INT PRIMARY KEY,
+  branch_name VARCHAR(255)
+);
+
 -- student
 CREATE TABLE student (
   student_id INT PRIMARY KEY,
@@ -5,7 +17,8 @@ CREATE TABLE student (
   name VARCHAR(255),
   email VARCHAR(255),
   password VARCHAR(255),
-  role VARCHAR(255)
+  role_id INT,
+  FOREIGN KEY (role_id) REFERENCES roles (role_id)
 );
 
 -- admin
@@ -15,13 +28,8 @@ CREATE TABLE admin_users (
   name VARCHAR(255),
   email VARCHAR(255),
   password VARCHAR(255),
-  role VARCHAR(255)
-);
-
--- branches
-CREATE TABLE branches (
-  branch_id INT PRIMARY KEY,
-  branch_name VARCHAR(255)
+  role_id INT,
+  FOREIGN KEY (role_id) REFERENCES roles (role_id)
 );
 
 -- faculty
@@ -31,25 +39,20 @@ CREATE TABLE faculty (
   name VARCHAR(255),
   email VARCHAR(255),
   password VARCHAR(255),
-  role VARCHAR(255),
-  -- try subroles
+  role_id INT,
   branch_id INT,
-  FOREIGN KEY (branch_id) REFERENCES branches(branch_id)
+  -- try subroles
+  FOREIGN KEY (role_id) REFERENCES roles (role_id),
+  FOREIGN KEY (branch_id) REFERENCES branches (branch_id)
 );
 
 -- courses
 CREATE TABLE courses (
   course_id INT PRIMARY KEY,
   course_name VARCHAR(255),
-  branch_id INT,
   course_cordinator VARCHAR(255),
-  FOREIGN KEY (branch_id) REFERENCES branches(branch_id)
-);
-
-CREATE TABLE roles (
-  role_id INT PRIMARY KEY,
-  role_name VARCHAR(255)
-  -- number of users with a role
+  branch_id INT,
+  FOREIGN KEY (branch_id) REFERENCES branches (branch_id)
 );
 
 -- student_info
@@ -62,8 +65,8 @@ CREATE TABLE student_info (
   group_no VARCHAR(255),
   current_year INT,
   current_sem INT,
-  FOREIGN KEY (student_id) REFERENCES student(student_id),
-  FOREIGN KEY (branch_id) REFERENCES branches(branch_id)
+  FOREIGN KEY (student_id) REFERENCES student (student_id),
+  FOREIGN KEY (branch_id) REFERENCES branches (branch_id)
 );
 
 -- student_course_info
@@ -78,9 +81,9 @@ CREATE TABLE student_course_info (
   lecture_attended INT,
   semester INT,
   course_cordinator VARCHAR(255),
-  FOREIGN KEY (student_id) REFERENCES student(student_id),
-  FOREIGN KEY (course_id) REFERENCES courses(course_id),
-  FOREIGN KEY (branch_id) REFERENCES branches(branch_id)
+  FOREIGN KEY (student_id) REFERENCES student (student_id),
+  FOREIGN KEY (course_id) REFERENCES courses (course_id),
+  FOREIGN KEY (branch_id) REFERENCES branches (branch_id)
 );
 
 -- student_grade_info
@@ -91,8 +94,8 @@ CREATE TABLE student_grade_info (
   grades_secured DECIMAL(5, 2),
   total_marks DECIMAL(5, 2),
   semester INT,
-  FOREIGN KEY (student_id) REFERENCES student(student_id),
-  FOREIGN KEY (course_id) REFERENCES courses(course_id)
+  FOREIGN KEY (student_id) REFERENCES student (student_id),
+  FOREIGN KEY (course_id) REFERENCES courses (course_id)
 );
 
 -- student_personal_info
@@ -108,7 +111,7 @@ CREATE TABLE student_personal_info (
   guardian_name VARCHAR(255),
   guardian_contact VARCHAR(20),
   blood_group VARCHAR(5),
-  FOREIGN KEY (student_id) REFERENCES student(student_id)
+  FOREIGN KEY (student_id) REFERENCES student (student_id)
 );
 
 -- student_attendance_info
@@ -118,6 +121,6 @@ CREATE TABLE student_attendance_info (
   lectures_attended INT,
   lectures_delivered INT,
   semester INT,
-  FOREIGN KEY (student_id) REFERENCES student(student_id),
-  FOREIGN KEY (course_id) REFERENCES courses(course_id)
+  FOREIGN KEY (student_id) REFERENCES student (student_id),
+  FOREIGN KEY (course_id) REFERENCES courses (course_id)
 );
