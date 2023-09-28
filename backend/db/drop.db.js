@@ -16,7 +16,6 @@ async function main() {
 
     const pool = new Pool(databaseConfig);
 
-
     const createTablesScript = await fs.readFile(
       path.join(__dirname, "./schema/004_drop_tables.sql"),
       "utf8"

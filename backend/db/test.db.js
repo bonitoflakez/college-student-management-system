@@ -16,10 +16,6 @@ async function main() {
     const queryPath = path.join(__dirname, "./schema/003_db_relation_test.sql");
     const sqlQueries = (await fs.readFile(queryPath, "utf8")).split(";");
 
-    const totalTests = 5;
-    const testsToFail = 3;
-    const testsToPass = 2;
-
     let numPasses = 0;
     let numErrors = 0;
 
@@ -43,10 +39,9 @@ async function main() {
     }
 
     console.log(`\n\n\n`);
-    console.log(`[+] ${numPasses}/${testsToPass} queries passed`);
-    console.log(`[+] ${numErrors}/${testsToFail} queries failed`);
-    console.log(`[+] ${numPasses + numErrors}/${totalTests} tests passed`);
-    
+    console.log(`[+] ${numPasses} queries passed`);
+    console.log(`[+] ${numErrors} queries failed`);
+
     pool.end();
   } catch (err) {
     console.error("[!] Error initializing the database:", err);
