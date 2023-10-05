@@ -1,0 +1,25 @@
+.navbar {
+  background-color: var(--accent);
+}
+
+.nav_font {
+  color: var(--bg);
+  transition: 0.1s ease-in-out;
+}
+
+.nav_font:hover {
+  color: var(--link-hvr);
+}
+
+/* navbar mobile view */
+.nav_mob_btn_font {
+  color: var(--bg);
+}
+
+.nav_mob_link_font {
+  color: var(--accent);
+}
+
+.nav_btn:focus {
+  outline: none;
+}

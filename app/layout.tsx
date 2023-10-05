@@ -1,19 +1,25 @@
 import './globals.css'
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = {
+import Navbar from '@/components/navbar/navbar'
+
+const metadata: Metadata = {
   title: 'College Management System',
   description: '~',
 }
 
-export default function RootLayout({
+const Layout = ({
   children,
 }: {
   children: React.ReactNode
-}) {
+}) => {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <>
+      <Navbar />
+      <main>{children}</main>
+    </>
   )
 }
+
+export { metadata };
+export default Layout;

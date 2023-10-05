@@ -1,7 +1,9 @@
-export default function Home() {
+const Home = () => {
   return (
     <>
-      <h2 className='font-bold'>Hewwo World!</h2>
+      <h2 className='font-bold'>Welcome to Dashboard!</h2>
     </>
   )
 }
+
+export default Home;
