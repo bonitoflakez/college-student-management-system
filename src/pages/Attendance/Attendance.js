@@ -1,8 +1,6 @@
-"use client";
-
-import React from 'react';
-import ProgressBar from '@ramonak/react-progress-bar';
-import { Subjects } from '@/utils/attendance';
+import React from "react";
+import ProgressBar from "@ramonak/react-progress-bar";
+import { Subjects } from "../../utils/attendance";
 
 const Attendance = () => {
   return (
@@ -15,7 +13,6 @@ const Attendance = () => {
             // counters
             let attended = 0;
             let delivered = 0;
-            let off = 0;
 
             s.dailyAttendance.forEach((entry) => {
               if (entry.attendanceType === "P") {
@@ -23,23 +20,21 @@ const Attendance = () => {
                 delivered++;
               } else if (entry.attendanceType === "A") {
                 delivered++;
-              } else if (entry.attendanceType === "-") {
-                off++;
               }
             });
 
             const attendancePercentage = (attended / delivered) * 100;
 
             return (
-              <span key={s.id} className='px-4 w-full'>
-                <p className='font-bold'>{s.subjectName}</p>
+              <span key={s.id} className="px-4 w-full">
+                <p className="font-bold">{s.subjectName}</p>
                 <ProgressBar
                   completed={Math.floor(attendancePercentage)}
                   bgColor={"var(--attendance-progress)"}
                   height={"20px"}
                   width={"100%"}
                   borderRadius={"2em"}
-                  labelAlignment='right'
+                  labelAlignment="right"
                   baseBgColor={"#e0e0de"}
                   labelColor={"#fff"}
                   labelSize={"15px"}
@@ -50,8 +45,8 @@ const Attendance = () => {
                   ariaValuetext={null}
                   maxCompleted={100}
                 />
-                <p className='text-sm'>Attended: {attended}</p>
-                <p className='text-sm'>Delivered: {delivered}</p>
+                <p className="text-sm">Attended: {attended}</p>
+                <p className="text-sm">Delivered: {delivered}</p>
 
                 <table className="table-auto mt-4 w-full">
                   <thead>
@@ -63,8 +58,8 @@ const Attendance = () => {
                   <tbody>
                     {s.dailyAttendance.map((entry, index) => (
                       <tr key={index}>
-                        <td className='text-center'>{entry.date}</td>
-                        <td className='text-center'>{entry.attendanceType}</td>
+                        <td className="text-center">{entry.date}</td>
+                        <td className="text-center">{entry.attendanceType}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -76,6 +71,6 @@ const Attendance = () => {
       </div>
     </>
   );
-}
+};
 
 export default Attendance;

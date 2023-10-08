@@ -1,7 +1,5 @@
-"use client";
-
-import React, { useState } from 'react';
-import styles from '@/components/navbar/navbar.module.css';
+import React, { useState } from "react";
+import styles from "./navbar.module.css";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -25,8 +23,11 @@ const Navbar = () => {
           <a href="/grades" className={`font-bold ${styles.nav_font}`}>
             Grades
           </a>
-          <a href="/student-info" className={`font-bold ${styles.nav_font}`}>
+          <a href="/studentInfo" className={`font-bold ${styles.nav_font}`}>
             Student Info
+          </a>
+          <a href="/auth" className={`font-bold ${styles.nav_font}`}>
+            Login/Signup
           </a>
         </div>
 
@@ -52,7 +53,9 @@ const Navbar = () => {
           </button>
 
           {mobileMenuOpen && (
-            <div className={`absolute top-16 right-0 bg-white p-4 mt-2 rounded shadow-md`}>
+            <div
+              className={`absolute top-16 right-0 bg-white p-4 mt-2 rounded shadow-md`}
+            >
               <a
                 href="/"
                 className={`block font-semibold mb-2 ${styles.nav_mob_link_font}`}
@@ -72,10 +75,13 @@ const Navbar = () => {
                 Grades
               </a>
               <a
-                href="/student-info"
+                href="/studentInfo"
                 className={`block font-semibold mb-2 ${styles.nav_mob_link_font}`}
               >
                 Student Info
+              </a>
+              <a href="/auth" className={`font-bold ${styles.nav_font}`}>
+                Login/Signup
               </a>
             </div>
           )}

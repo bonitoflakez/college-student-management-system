@@ -1,0 +1,17 @@
+.button {
+  background-color: var(--accent);
+  transition: 0.2s ease-in-out background-color;
+}
+
+.button:hover {
+  background-color: var(--accent-dark);
+}
+
+.txt {
+  color: var(--accent);
+  transition: 0.2s ease-in-out color;
+}
+
+.txt:hover {
+  color: var(--accent-dark);
+}
