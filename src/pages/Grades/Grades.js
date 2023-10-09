@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { studentGradeList } from "../../utils/studentGradeList";
 
 const Grades = () => {
-  const selectedStudentID = "123123123";
-  const selectedStudentName = "John";
+  const storedData = localStorage.getItem("userData");
+
+  const storedUser = JSON.parse(storedData);
 
   // calculate CGPA based on grades and credits
   const calculateCGPA = (courses) => {
@@ -39,8 +40,8 @@ const Grades = () => {
   // Find the selected student's data
   const selectedStudent = studentGradeList.find(
     (student) =>
-      student.studentID === selectedStudentID &&
-      student.studentName === selectedStudentName
+      student.studentName === storedUser?.name &&
+      student.studentID === storedUser?.id
   );
 
   return (

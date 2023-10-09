@@ -3,6 +3,7 @@ import styles from "./auth.module.css";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Navigate } from "react-router-dom";
 
 const Auth = () => {
   const [isStudent, setIsStudent] = useState(true);
@@ -61,6 +62,7 @@ const Auth = () => {
         ) {
           console.log("Login successful");
           toast.success("Login successful!");
+          <Navigate to={"/"} />;
         } else {
           console.log("Invalid login credentials");
           toast.error("Invalid login credentials");

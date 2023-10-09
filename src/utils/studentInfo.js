@@ -8,7 +8,7 @@ export const studentInfo = [
     universityEmail: "johndoe123@university.edu",
     studentID: "123123123",
     groupNumber: "A1",
-    courseName: "Computer Science",
+    courseName: "Compute Science and Engineering",
     branchName: "Information Technology",
     currentSubjects: [
       {
