@@ -1,33 +1,45 @@
 import React from "react";
+import { ToastContainer, toast } from "react-toastify";
 import ProgressBar from "@ramonak/react-progress-bar";
-import { Subjects } from "../../utils/attendance";
+import { StudentAttendance } from "../../utils/attendance";
 
 const Attendance = () => {
+  const storedData = localStorage.getItem("userData");
+
+  const storedUser = JSON.parse(storedData);
+
+  // Find the student's attendance data based on name and ID
+  const studentAttendance = StudentAttendance.find(
+    (student) =>
+      student.studentName === storedUser?.name &&
+      student.studentID === storedUser?.id
+  );
+
+  if (!studentAttendance) {
+    toast(`Attendance data not found for ${storedUser?.name}`);
+    return (
+      <div className="font-bold text-red-500">
+        Attendance data not found for {storedUser?.name};
+      </div>
+    );
+  }
+
   return (
     <>
       <h2 className="font-bold text-2xl text-center">Attendance</h2>
       <div className="container p-4 m-4 flex item-center border max-w-screen mx-auto">
-        {/* todo: add show attendance by session/semester */}
         <div className="container flex justify-center">
-          {Subjects.map((s) => {
-            // counters
-            let attended = 0;
-            let delivered = 0;
-
-            s.dailyAttendance.forEach((entry) => {
-              if (entry.attendanceType === "P") {
-                attended++;
-                delivered++;
-              } else if (entry.attendanceType === "A") {
-                delivered++;
-              }
-            });
-
+          {studentAttendance.subjects.map((subject) => {
+            // Calculate attendance percentage for each subject
+            const attended = subject.dailyAttendance.filter(
+              (entry) => entry.attendanceType === "P"
+            ).length;
+            const delivered = subject.dailyAttendance.length;
             const attendancePercentage = (attended / delivered) * 100;
 
             return (
-              <span key={s.id} className="px-4 w-full">
-                <p className="font-bold">{s.subjectName}</p>
+              <span key={subject.subjectID} className="px-4 w-full">
+                <p className="font-bold">{subject.subjectName}</p>
                 <ProgressBar
                   completed={Math.floor(attendancePercentage)}
                   bgColor={"var(--attendance-progress)"}
@@ -56,7 +68,7 @@ const Attendance = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {s.dailyAttendance.map((entry, index) => (
+                    {subject.dailyAttendance.map((entry, index) => (
                       <tr key={index}>
                         <td className="text-center">{entry.date}</td>
                         <td className="text-center">{entry.attendanceType}</td>
@@ -69,6 +81,7 @@ const Attendance = () => {
           })}
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

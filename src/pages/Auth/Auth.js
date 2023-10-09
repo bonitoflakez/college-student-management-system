@@ -1,6 +1,9 @@
 import { useState } from "react";
 import styles from "./auth.module.css";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Auth = () => {
   const [isStudent, setIsStudent] = useState(true);
   const [isRegistering, setIsRegistering] = useState(true);
@@ -32,14 +35,22 @@ const Auth = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!isStudent) {
       formData.role = "faculty";
     } else {
       formData.role = "student";
     }
 
+    // Check if any of the required fields are empty
+    if (!formData.email || !formData.password || !formData.id) {
+      toast.error("Invalid data in input fields.");
+      return;
+    }
+
     if (isRegistering) {
       localStorage.setItem("userData", JSON.stringify(formData));
+      toast.success("Registered successfully!");
     } else {
       const storedData = localStorage.getItem("userData");
       if (storedData) {
@@ -49,17 +60,20 @@ const Auth = () => {
           storedUser.password === formData.password
         ) {
           console.log("Login successful");
+          toast.success("Login successful!");
         } else {
           console.log("Invalid login credentials");
+          toast.error("Invalid login credentials");
         }
       } else {
         console.log("User not registered");
+        toast.error("User not registered");
       }
     }
   };
 
   return (
-    <div className="container mx-auto flex justify-center items-center">
+    <div className="container mx-auto pt-10 flex justify-center items-center">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <h2 className="font-bold text-xl text-center">
           {isRegistering ? "Registration" : "Login"} (
@@ -70,20 +84,20 @@ const Auth = () => {
             <>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
-                  {isStudent ? "Student ID" : "Faculty ID"}
+                  {"Name*"}
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  name="id"
+                  name="name"
                   type="text"
-                  placeholder={isStudent ? "Student ID" : "Faculty ID"}
-                  value={formData.id}
+                  placeholder={"Name"}
+                  value={formData.name}
                   onChange={handleChange}
                 />
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Branch
+                  Branch*
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -96,7 +110,7 @@ const Auth = () => {
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Session
+                  Session*
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -111,20 +125,20 @@ const Auth = () => {
           )}
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              {isRegistering ? "Name" : "Role"}
+              {"ID*"}
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              name={isRegistering ? "name" : "role"}
+              name={"id"}
               type="text"
-              placeholder={isRegistering ? "Name" : "Role"}
-              value={formData.name}
+              placeholder={"ID*"}
+              value={formData.id}
               onChange={handleChange}
             />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              Email
+              Email*
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -137,7 +151,7 @@ const Auth = () => {
           </div>
           <div className="mb-6">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              Password
+              Password*
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
@@ -175,6 +189,7 @@ const Auth = () => {
             </button>
           </div>
         </form>
+        <ToastContainer />
       </div>
     </div>
   );

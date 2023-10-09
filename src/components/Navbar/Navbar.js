@@ -8,6 +8,10 @@ const Navbar = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const logOut = () => {
+    localStorage.removeItem("userData");
+  };
+
   return (
     <nav className={`p-4 ${styles.navbar}`}>
       <div className="container mx-auto flex items-center justify-between">
@@ -28,6 +32,13 @@ const Navbar = () => {
           </a>
           <a href="/auth" className={`font-bold ${styles.nav_font}`}>
             Login/Signup
+          </a>
+          <a
+            href="/auth"
+            className={`font-bold ${styles.nav_font}`}
+            onClick={logOut}
+          >
+            Logout
           </a>
         </div>
 
@@ -82,6 +93,13 @@ const Navbar = () => {
               </a>
               <a href="/auth" className={`font-bold ${styles.nav_font}`}>
                 Login/Signup
+              </a>
+              <a
+                href="/auth"
+                className={`font-bold ${styles.nav_font}`}
+                onClick={logOut}
+              >
+                Logout
               </a>
             </div>
           )}
