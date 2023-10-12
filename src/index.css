@@ -1,0 +1,20 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  --accent: #8b735b;
+  --accent-dark: #755e46;
+  --bg: #ffffff;
+  --alert-bg: #ffd700;
+  --highlighted-text: #ff5733;
+  --disabled-text: #808080;
+  --attendance-progress: #50c878;
+  --text: #333333;
+  --link-hvr: #dddddd;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+}
