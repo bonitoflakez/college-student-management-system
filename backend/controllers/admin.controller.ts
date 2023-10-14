@@ -2,33 +2,14 @@ import { Request, Response } from "express";
 // import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcryptjs";
 
-import pool from "../../db/connection";
+import { GenerateUniversityUserID } from "../helpers/userIdGenerater.helper";
+
+import pool from "../db/connection";
 
 /*
 TODO: Add login function
-TODO: Add user validation (check if user already exists)
+// TODO: Add user validation (check if user already exists)
 */
-
-// generate a userID based on user's role
-const generateUniversityUserID = (role: string) => {
-  var roleSuffix;
-
-  if (role === "admin" || role === "Admin") {
-    roleSuffix = "AD";
-  } else if (role === "faculty" || role === "Faculty") {
-    roleSuffix = "FC";
-  } else if (role === "student" || role === "Student") {
-    roleSuffix = "ST";
-  } else {
-    roleSuffix = null;
-  }
-
-  const numericPart = Math.floor(Math.random() * 9900000) + 100000;
-
-  const userID = `${numericPart}${roleSuffix}`;
-
-  return userID;
-};
 
 const AddUser = (req: Request, res: Response) => {
   const client = pool.connect();
@@ -49,7 +30,7 @@ const AddUser = (req: Request, res: Response) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Generate a user ID based on the user's role
-        const userID = generateUniversityUserID(role);
+        const userID = GenerateUniversityUserID(role);
 
         const addUserQuery =
           "INSERT INTO users (user_id, username, password, email, role_id) VALUES ($1, $2, $3, $4, (SELECT role_id FROM roles WHERE role_name = $5));";
@@ -64,6 +45,7 @@ const AddUser = (req: Request, res: Response) => {
           return res.status(201).send({
             status: "user registered",
             message: {
+              user_id: userID,
               username: username,
               email: email,
               role: role,
@@ -77,8 +59,8 @@ const AddUser = (req: Request, res: Response) => {
             message: "There was some issue while registering user",
           });
         }
-      } catch (error: any) {
-        console.error("Error while adding user:", error.message);
+      } catch (err: any) {
+        console.error("Error while adding user:", err.message);
         await client.query("ROLLBACK");
         return res.status(500).json({
           message: "Internal server error",
