@@ -23,8 +23,7 @@ const AddUser = (req: Request, res: Response) => {
   }
 
   // check if an admin already exists
-  const searchAdminQuery = "SELECT * FROM users WHERE role_id = $1";
-  const searchAdminValues = [1];
+  const searchAdminQuery = "SELECT * FROM users WHERE role_id = 1";
 
   client
     .then(async (client) => {
@@ -41,16 +40,16 @@ const AddUser = (req: Request, res: Response) => {
 
         const addUserValues = [userID, username, hashedPassword, email, role];
 
-        const searchAdminResult = await client.query(
-          searchAdminQuery,
-          searchAdminValues
-        );
+        if (role === ("admin" || "Admin")) {
+          const searchAdminResult = await client.query(searchAdminQuery);
 
-        // check if admin already eixts
-        if (searchAdminResult.rowCount > 0) {
-          return res.status(403).json({
-            message: "admin user already exists",
-          });
+          console.log(searchAdminResult.rows[0]);
+
+          if (searchAdminResult.rowCount > 0) {
+            return res.status(403).json({
+              message: "admin user already exists",
+            });
+          }
         }
 
         const result = await client.query(addUserQuery, addUserValues);

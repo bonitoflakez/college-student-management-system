@@ -34,13 +34,12 @@ const Login = (req: Request, res: Response) => {
 
           var role = "unknown";
 
-          switch (user.role_id) {
-            case 1:
-              role = "admin";
-            case 2:
-              role = "faculty";
-            case 3:
-              role = "student";
+          if (user.role_id === 1) {
+            role = "admin";
+          } else if (user.role_id === 2) {
+            role = "faculty";
+          } else {
+            role = "student";
           }
 
           if (isSame) {

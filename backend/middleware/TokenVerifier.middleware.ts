@@ -11,6 +11,8 @@ interface JwtPayload {
 declare global {
   namespace Express {
     interface Request {
+      role?: string;
+      token?: string;
       user_id?: string;
     }
   }
@@ -27,7 +29,7 @@ export const TokenVerifier = (
 ) => {
   const authHeaderToken = req.header("Authorization");
 
-  if (!authHeaderToken?.startsWith("Bearer ")) {
+  if (!authHeaderToken || !authHeaderToken.startsWith("Bearer ")) {
     return res.status(401).json({
       message: "Invalid token",
     });
@@ -55,6 +57,8 @@ export const TokenVerifier = (
       }
 
       req.user_id = decoded.id;
+      req.token = token;
+
       next();
     } catch (error) {
       console.error("JWT verification error:", error);
