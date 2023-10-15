@@ -9,8 +9,6 @@ const FacultyAdminVerifier = (
   const token = req.token as string;
   const user_id = req.user_id;
 
-  console.log(token);
-
   try {
     // Decode the token to extract user information
     const decoded = jwt.decode(token) as { role?: string } | null;
