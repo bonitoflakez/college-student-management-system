@@ -17,7 +17,7 @@ declare global {
 }
 
 /**
- * TODO: Add token revoke functionality
+ * TODO: (Feat) Add token revoke functionality
  */
 
 export const TokenVerifier = (

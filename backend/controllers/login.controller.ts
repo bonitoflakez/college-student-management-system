@@ -51,15 +51,15 @@ const Login = (req: Request, res: Response) => {
              * Can be fixed by downgrading
              *  'jsonwebtoken' version '9.0.2' -> '8.5.1'
              *  '@types/jsonwebtoken' version '9.0.3' -> '8.5.1'
-             * 
+             *
              * To fix this in latest 'jsonwebtoken' version '9.0.2' add
-             * 
+             *
              * ```
              * algorithm: "HS256",
              * allowInsecureKeySizes: true,
              * allowInvalidAsymmetricKeyTypes: true,
              * ```
-             * 
+             *
              * Reference: https://github.com/auth0/node-jsonwebtoken/wiki/Migration-Notes:-v8-to-v9
              */
 

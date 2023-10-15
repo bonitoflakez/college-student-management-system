@@ -7,7 +7,7 @@ import { GenerateUniversityUserID } from "../helpers/userIdGenerater.helper";
 import pool from "../db/connection";
 
 /*
-TODO: Add login function
+// TODO: Add login function
 // TODO: Add user validation (check if user already exists)
 */
 
@@ -21,6 +21,10 @@ const AddUser = (req: Request, res: Response) => {
       message: "Invalid user data",
     });
   }
+
+  // check if an admin already exists
+  const searchAdminQuery = "SELECT * FROM users WHERE role_id = $1";
+  const searchAdminValues = [1];
 
   client
     .then(async (client) => {
@@ -36,6 +40,18 @@ const AddUser = (req: Request, res: Response) => {
           "INSERT INTO users (user_id, username, password, email, role_id) VALUES ($1, $2, $3, $4, (SELECT role_id FROM roles WHERE role_name = $5));";
 
         const addUserValues = [userID, username, hashedPassword, email, role];
+
+        const searchAdminResult = await client.query(
+          searchAdminQuery,
+          searchAdminValues
+        );
+
+        // check if admin already eixts
+        if (searchAdminResult.rowCount > 0) {
+          return res.status(403).json({
+            message: "admin user already exists",
+          });
+        }
 
         const result = await client.query(addUserQuery, addUserValues);
 
