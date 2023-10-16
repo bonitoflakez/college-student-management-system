@@ -11,6 +11,7 @@ const Grades = () => {
     let totalCredits = 0;
     let totalWeightedGradePoints = 0;
 
+    // grade to CGPA
     const gradeToCGPA = {
       O: 10,
       A: 9,
