@@ -21,8 +21,6 @@ const FacultyAdminVerifier = (
 
     const userRole = decoded.role;
 
-    console.log(userRole, decoded);
-
     if (userRole === "admin" || userRole === "faculty") {
       req.user_id = user_id;
       req.role = userRole;
