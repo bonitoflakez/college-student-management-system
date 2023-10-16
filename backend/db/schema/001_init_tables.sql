@@ -27,7 +27,7 @@ CREATE TABLE users (
   uid SERIAL PRIMARY KEY,
   user_id VARCHAR(255) UNIQUE NOT NULL,
   email VARCHAR(255) UNIQUE NOT NULL,
-  username VARCHAR(255),
+  username VARCHAR(255) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL,
   role_id INT,
   FOREIGN KEY (role_id) REFERENCES roles (role_id)
@@ -36,14 +36,14 @@ CREATE TABLE users (
 -- Student Details Table
 CREATE TABLE student_details (
   sid SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
+  name VARCHAR(255),
   email VARCHAR(255) NOT NULL,
-  student_id INT NOT NULL,
+  student_id VARCHAR(255) NOT NULL,
   phone_number VARCHAR(20),
   guardian_name VARCHAR(255),
   guardian_email VARCHAR(255),
   guardian_phone_number VARCHAR(20),
-  course_name VARCHAR(255) NOT NULL,
-  branch_name VARCHAR(255) NOT NULL,
-  joining_session INT NOT NULL
+  course_name VARCHAR(255),
+  branch_name VARCHAR(255),
+  joining_session INT
 );

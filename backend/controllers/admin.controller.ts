@@ -40,10 +40,12 @@ const AddUser = (req: Request, res: Response) => {
 
         const addUserValues = [userID, username, hashedPassword, email, role];
 
-        if (role === ("admin" || "Admin")) {
-          const searchAdminResult = await client.query(searchAdminQuery);
+        const addInitialStudentDetailsQuery =
+          "INSERT INTO student_details (email, student_id) VALUES ($1, $2)";
+        const addInitialStudentDetailsValues = [email, userID];
 
-          console.log(searchAdminResult.rows[0]);
+        if (role === ("Admin" || "admin")) {
+          const searchAdminResult = await client.query(searchAdminQuery);
 
           if (searchAdminResult.rowCount > 0) {
             return res.status(403).json({
@@ -54,19 +56,7 @@ const AddUser = (req: Request, res: Response) => {
 
         const result = await client.query(addUserQuery, addUserValues);
 
-        if (result.rowCount === 1) {
-          await client.query("COMMIT");
-
-          return res.status(201).send({
-            status: "user registered",
-            message: {
-              user_id: userID,
-              username: username,
-              email: email,
-              role: role,
-            },
-          });
-        } else {
+        if (result.rowCount !== 1) {
           await client.query("ROLLBACK");
 
           return res.status(401).json({
@@ -74,6 +64,32 @@ const AddUser = (req: Request, res: Response) => {
             message: "There was some issue while registering user",
           });
         }
+
+        // add initial student data
+        if (role === ("Student" || "student")) {
+          const addInitialStudentDetailsResult = await client.query(
+            addInitialStudentDetailsQuery,
+            addInitialStudentDetailsValues
+          );
+
+          if (addInitialStudentDetailsResult.rowCount !== 1) {
+            await client.query("ROLLBACK");
+          }
+        }
+
+        await client.query("COMMIT");
+
+        // TODO: add initial faculty data
+
+        return res.status(201).send({
+          status: "user registered",
+          message: {
+            user_id: userID,
+            username: username,
+            email: email,
+            role: role,
+          },
+        });
       } catch (err: any) {
         console.error("Error while adding user:", err.message);
         await client.query("ROLLBACK");
