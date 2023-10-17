@@ -22,6 +22,12 @@ CREATE TABLE branches (
   branch_name VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE groups (
+  group_id SERIAL PRIMARY KEY,
+  branch_name VARCHAR(255) NOT NULL,
+  group_name VARCHAR(255) NOT NULL
+);
+
 -- Users Table (for Admin, Student, Faculty)
 CREATE TABLE users (
   uid SERIAL PRIMARY KEY,
@@ -38,11 +44,26 @@ CREATE TABLE student_details (
   sid SERIAL PRIMARY KEY,
   name VARCHAR(255),
   email VARCHAR(255) NOT NULL,
-  student_id VARCHAR(255) NOT NULL,
+  student_id VARCHAR(255) UNIQUE NOT NULL,
   phone_number VARCHAR(20),
   guardian_name VARCHAR(255),
   guardian_email VARCHAR(255),
   guardian_phone_number VARCHAR(20),
+  group_id INT REFERENCES groups(group_id),
+  course_name VARCHAR(255),
+  branch_name VARCHAR(255),
+  joining_session INT
+);
+
+-- Faculty Details Table
+CREATE TABLE faculty_details (
+  fid SERIAL PRIMARY KEY,
+  name VARCHAR(255),
+  email VARCHAR(255) NOT NULL,
+  faculty_id VARCHAR(255) UNIQUE NOT NULL,
+  phone_number VARCHAR(20),
+  subrole_id INT REFERENCES subroles(subrole_id),
+  group_id INT REFERENCES groups(group_id),
   course_name VARCHAR(255),
   branch_name VARCHAR(255),
   joining_session INT

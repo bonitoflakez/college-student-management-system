@@ -44,6 +44,10 @@ const AddUser = (req: Request, res: Response) => {
           "INSERT INTO student_details (email, student_id) VALUES ($1, $2)";
         const addInitialStudentDetailsValues = [email, userID];
 
+        const addInitialFacultyDetailsQuery =
+          "INSERT INTO faculty_details (email, faculty_id) VALUES ($1, $2)";
+        const addInitialFacultyDetailsValues = [email, userID];
+
         if (role === ("Admin" || "admin")) {
           const searchAdminResult = await client.query(searchAdminQuery);
 
@@ -73,6 +77,17 @@ const AddUser = (req: Request, res: Response) => {
           );
 
           if (addInitialStudentDetailsResult.rowCount !== 1) {
+            await client.query("ROLLBACK");
+          }
+        }
+
+        if (role === ("Faculty" || "faculty")) {
+          const addInitialFacultyDetailsResult = await client.query(
+            addInitialFacultyDetailsQuery,
+            addInitialFacultyDetailsValues
+          );
+
+          if (addInitialFacultyDetailsResult.rowCount !== 1) {
             await client.query("ROLLBACK");
           }
         }

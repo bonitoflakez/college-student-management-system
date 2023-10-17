@@ -1,16 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-const FacultyAdminVerifier = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const FacultyVerifier = (req: Request, res: Response, next: NextFunction) => {
   const token = req.token as string;
   const user_id = req.user_id;
 
   try {
-    // Decode the token to extract user information
     const decoded = jwt.decode(token) as { role?: string } | null;
 
     if (!decoded || !decoded.role) {
@@ -21,7 +16,7 @@ const FacultyAdminVerifier = (
 
     const userRole = decoded.role;
 
-    if (userRole === "Admin" || userRole === "Faculty") {
+    if (userRole === "Faculty") {
       req.user_id = user_id;
       req.role = userRole;
 
@@ -39,4 +34,4 @@ const FacultyAdminVerifier = (
   }
 };
 
-export { FacultyAdminVerifier };
+export { FacultyVerifier };

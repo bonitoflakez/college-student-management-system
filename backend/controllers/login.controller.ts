@@ -32,14 +32,14 @@ const Login = (req: Request, res: Response) => {
         if (user) {
           const isSame = await bcrypt.compare(password, user.password);
 
-          var role = "unknown";
+          var role = "Unknown";
 
           if (user.role_id === 1) {
-            role = "admin";
+            role = "Admin";
           } else if (user.role_id === 2) {
-            role = "faculty";
+            role = "Faculty";
           } else {
-            role = "student";
+            role = "Student";
           }
 
           if (isSame) {
@@ -76,10 +76,10 @@ const Login = (req: Request, res: Response) => {
               }
             );
 
-            res.cookie("jwt", token, {
-              maxAge: 1 * 24 * 60 * 60,
-              httpOnly: true,
-            });
+            // res.cookie("jwt", token, {
+            //   maxAge: 1 * 24 * 60 * 60,
+            //   httpOnly: true,
+            // });
 
             res.status(201).json({
               status: "authorized",

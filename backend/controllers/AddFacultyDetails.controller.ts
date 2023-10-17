@@ -2,19 +2,17 @@ import { Request, Response } from "express";
 
 import pool from "../db/connection";
 
-const AddStudentDetails = (req: Request, res: Response) => {
+const AddFacultyDetails = (req: Request, res: Response) => {
   const client = pool.connect();
 
   const user_id = req.user_id;
   const userRole = req.role;
 
   const {
-    student_id,
+    faculty_id,
     name,
     phone_number,
-    guardian_name,
-    guardian_email,
-    guardian_phone_number,
+    subrole_id,
     group_id,
     course_name,
     branch_name,
@@ -22,12 +20,10 @@ const AddStudentDetails = (req: Request, res: Response) => {
   } = req.body;
 
   const requiredFields = [
-    "student_id",
+    "faculty_id",
     "name",
     "phone_number",
-    "guardian_name",
-    "guardian_email",
-    "guardian_phone_number",
+    "subrole_id",
     "group_id",
     "course_name",
     "branch_name",
@@ -43,45 +39,42 @@ const AddStudentDetails = (req: Request, res: Response) => {
   client
     .then(async (client) => {
       try {
-        await client.query("BEGIN");
+        const addFacultyDetailsQuery =
+          "UPDATE faculty_details SET name = $1, phone_number = $2, subrole_id = $3, group_id = $4, course_name = $5, branch_name = $6, joining_session = $7 WHERE faculty_id = $8";
 
-        const addStudentDetailsQuery =
-          "UPDATE student_details SET name = $1, phone_number = $2, guardian_name = $3, guardian_email = $4, guardian_phone_number = $5, group_id = $6, course_name = $7, branch_name = $8, joining_session = $9 WHERE student_id = $10";
-
-        const addStudentDetailsValues = [
+        const addFacultyDetailsValues = [
           name,
           phone_number,
-          guardian_name,
-          guardian_email,
-          guardian_phone_number,
+          subrole_id,
           group_id,
           course_name,
           branch_name,
           joining_session,
-          student_id,
+          faculty_id,
         ];
 
-        const addStudentDetailsResult = await client.query(
-          addStudentDetailsQuery,
-          addStudentDetailsValues
+        const addFacultyDetailsResult = await client.query(
+          addFacultyDetailsQuery,
+          addFacultyDetailsValues
         );
 
-        if (addStudentDetailsResult.rowCount !== 1) {
+        if (addFacultyDetailsResult.rowCount !== 1) {
           await client.query("ROLLBACK");
 
           return res.status(403).json({
-            message: "couldn't update student details",
+            message: "couldn't update faculty details",
           });
         }
 
         await client.query("COMMIT");
 
+        // faculty details
         return res.status(200).json({
           auth_message: `Logged in as ${user_id} with ${userRole} access!`,
-          message: "added student details successfully",
+          message: "added faculty details successfully",
         });
       } catch (err: any) {
-        console.error("Error while adding student details:", err.message);
+        console.error("Error while adding faculty details:", err.message);
 
         return res.status(500).json({
           message: "Internal server error",
@@ -100,4 +93,4 @@ const AddStudentDetails = (req: Request, res: Response) => {
     });
 };
 
-export { AddStudentDetails };
+export { AddFacultyDetails };
