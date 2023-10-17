@@ -45,5 +45,17 @@ curl --location 'http://localhost:8000/api/student/add-details' \
 Add Faculty Details (Admin only)
 
 ```sh
-
+curl --location 'http://localhost:8000/api/faculty/add-details' \
+--header 'Authorization: Bearer <token>' \
+--header 'Content-Type: application/json' \
+--data '{
+          "name": "<faculty-name>",
+          "phone_number": "<faculty-phone-number>",
+          "subrole_id": <faculty-subrole-id>,
+          "group_id": <assigned-group-id>,
+          "course_name": "<course-name>",
+          "branch_name": "<branch-name>",
+          "joining_session": <joining-session-year>,
+          "faculty_id": "<faculty-id    >"
+}'
 ```
