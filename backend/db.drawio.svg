@@ -1,0 +1,139 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1553px" height="601px" viewBox="-0.5 -0.5 1553 601" content="&lt;mxfile&gt;&lt;diagram id=&quot;VJ29SEZq7QQGdesMHxj5&quot; name=&quot;Page-1&quot;&gt;zVfbctsgEP0az7QPyegS3x4dy3HzkEynTqftI5GQxAQJF5Av/fouCCQR2YnTJk1fbDjAsnt2z0oahPNit+Rond+wBNNB4CW7QRgNgiDwghH8KWRfI74fTmsk4yQxWAusyC9sQM+gFUmwcDZKxqgkaxeMWVniWDoY4pxt3W0po+6ta5ThHrCKEe2j30gi8xqdDL0W/4RJltubfc+sFMhuNoDIUcK2HShcDMI5Z0zWo2I3x1SxZ3mpz10dWW0c47iUpxwwmRByb2PDCYRqpiUr4e8ylwWFmQ9DMMv337uTHzDx7CTaObO9mfW9Mo4KVvHYXByYRCKeYbMrrCHlUueYiWSJWYHhFtjAMUWSbNzsIJPkrNnX8gADQ8VhWsZ/Sov3L2i5eC9ajC8bRCtjdBbdXN/2yOKsKhOcGHK2OZF4tUY6oi20BJe7oyxsMJd492SEZnU8NXIyDcVOt604fau4vCPM0Pt7TmxP6pDywuJJWSlNj/Mnp5ZF2C+L6XuVRdhjYHX3NVrc3r17YfhDtzAu/H5ljN+oMC56rFyhuKJy/x+w4j9Py/SNaJkckMuIShUkeD3KpI6xRpQyHKpGPytmF86E1swMNviT9a4+ZtatIdOevC+LpbUJ/tVm3asA7t+/tsBdToSKO44hVVITpYO6x/BTCcidegPR2sqIkJhrr6sEcqTPlWpDatPvFbi4x1zos6TMdBCNG+ujXtyiAu4Dhr1FgQith5+REFvG1QVQORTr9AiSlcowjFtPVOSNC9fRSVfO0jqYmGPoGbXF0mFC5ljZi2s4UX4QNWSwoE4mWIKvwvadliqgTa1/aLzzGG9Z+qj8ruK8rrbAW1aIJ0RfElmLKvxLjkq1S43n0B+FYWgJolo31FtnZA4xiPPDoT9SJYhJutITkrMHPGcUHG0aeQqV8AgSIF6d1mjYzu4YCDk6C7wjEmeg35Tqd8GcJMAIYG1jUKcQhazCOAa2IJrXeXIOh04n8EcHHp2HWkEwfIVeMD3aCyr6uCQpsUiERH7PkCr5Jo3tan//XFcNxxuCN0oe9xyxJEZClVzJJElJDLXNSlVmKWfFYamedlWnAruV6VbjDeRL1fqLTEJ1Q9q1TmorX3D9PnCqbzMJxxPwCevDMTuZQPiMU59bjfuIP5x66aoR93WZsicPAdjN+iM1PvNUdB+hVikUp8oY4rF5vwpfRzUXk/Oxq5th0NdNMA7Oh33lNBJ7gXJg2n4T6rXOp3W4+A0=&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs/>
+    <g>
+        <path d="M 770.02 30 L 176.73 317.23" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 172.01 319.51 L 176.78 313.31 L 176.73 317.23 L 179.83 319.61 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 833.46 30 L 1455.22 317.33" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 1459.99 319.53 L 1452.16 319.77 L 1455.22 317.33 L 1455.1 313.42 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="741" y="0" width="120" height="30" rx="4.5" ry="4.5" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 15px; margin-left: 742px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                ADMIN
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="801" y="19" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    ADMIN
+                </text>
+            </switch>
+        </g>
+        <path d="M 136 350 L 136 423.63" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 136 428.88 L 132.5 421.88 L 136 423.63 L 139.5 421.88 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="101" y="320" width="70" height="30" rx="4.5" ry="4.5" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 68px; height: 1px; padding-top: 335px; margin-left: 102px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                STUDENT
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="136" y="339" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    STUDENT
+                </text>
+            </switch>
+        </g>
+        <rect x="1461" y="320" width="90" height="30" rx="4.5" ry="4.5" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 88px; height: 1px; padding-top: 335px; margin-left: 1462px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Faculty
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="1506" y="339" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Faculty
+                </text>
+            </switch>
+        </g>
+        <rect x="706" y="70" width="190" height="250" fill="none" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 182px; height: 1px; padding-top: 60px; margin-left: 710px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 260px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                <h1>
+                                    <font style="font-size: 18px;">
+                                        ADMIN REG
+                                    </font>
+                                </h1>
+                                <p>
+                                    This account will be used to register students and faculty members using:
+                                </p>
+                                <p>
+                                    Name, Email, Password while assigning a student/faculty ID
+                                </p>
+                                <p>
+                                    After creating an account they can add in other details related to user (student or faculty) such as Guardian Details, Branch, Course, Group and other things.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="801" y="72" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    ADMIN REG...
+                </text>
+            </switch>
+        </g>
+        <rect x="-0.25" y="430" width="272.5" height="160" rx="4.8" ry="4.8" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe flex-start; width: 271px; height: 1px; padding-top: 510px; margin-left: 2px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: left;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                <ul>
+                                    <li>
+                                        Dashboard
+                                    </li>
+                                    <li>
+                                        Can revieve braodcast notifications from faculty members
+                                    </li>
+                                    <li>
+                                        Course, Branch, Group and Mentor
+                                    </li>
+                                    <li>
+                                        Course Content and Resources
+                                    </li>
+                                    <li>
+                                        Attendance Record
+                                    </li>
+                                    <li>
+                                        Grades and Marks
+                                    </li>
+                                    <li>
+                                        Student Info
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="2" y="514" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px">
+                    DashboardCan revieve braodcast notifications...
+                </text>
+            </switch>
+        </g>
+    </g>
+    <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+        <a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank">
+            <text text-anchor="middle" font-size="10px" x="50%" y="100%">
+                Text is not SVG - cannot display
+            </text>
+        </a>
+    </switch>
+</svg>

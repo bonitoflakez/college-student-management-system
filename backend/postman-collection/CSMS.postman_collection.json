@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "79aa9eb0-0481-4b40-9710-35ac21606863",
+		"name": "CSMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24138000"
+	},
+	"item": [
+		{
+			"name": "add student details",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg1MDQxMzVGQyIsInJvbGUiOiJGYWN1bHR5IiwiaWF0IjoxNjk3NTUyNzY3LCJleHAiOjE3ODM5NTI3Njd9.WS5B7w9dxdNrmOG5CWfmliZ8VNdtraPtAds3g5xMJU0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"student_id\": \"2617535ST\",\r\n    \"name\": \"Student\",\r\n    \"phone_number\": \"0987654321\",\r\n    \"guardian_name\": \"Student's Dad\",\r\n    \"guardian_email\": \"students.dad@gmail.com\",\r\n    \"guardian_phone_number\": \"1234567890\",\r\n    \"group_id\": 1,\r\n    \"course_name\": \"Compute Science and Engineering\",\r\n    \"branch_name\": \"Computer Science\",\r\n    \"joining_session\": 2021\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/student/add-details",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"student",
+						"add-details"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add faculty details",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjQxOTNBRCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY5NzU1MDg1MCwiZXhwIjoxNzgzOTUwODUwfQ.N_zRV4XJas-hB2EwBzM9cOKUWftoHTeKAbL9gMKvdx4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"name\": \"Faculty1\",\r\n          \"phone_number\": \"0987654321\",\r\n          \"subrole_id\": 2,\r\n          \"group_id\": 1,\r\n          \"course_name\": \"Computer Science and Engineering\",\r\n          \"branch_name\": \"Computer Science\",\r\n          \"joining_session\": 2022,\r\n          \"faculty_id\": \"587307FC\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/faculty/add-details",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"faculty",
+						"add-details"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add User",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"faculty1\",\r\n    \"password\": \"faculty1123\",\r\n    \"email\": \"faculty1@example.com\",\r\n    \"role\": \"Faculty\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": \"8504135FC\",\r\n    \"password\": \"faculty123\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

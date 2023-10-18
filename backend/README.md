@@ -1,4 +1,6 @@
-# college-management-system-backend
+# College Student Management System
+
+> Documentation tbd
 
 To install dependencies:
 

@@ -1,126 +1,70 @@
--- roles
+-- Roles Table
 CREATE TABLE roles (
-  role_id INT PRIMARY KEY,
-  role_name VARCHAR(255)
+  role_id SERIAL PRIMARY KEY,
+  role_name VARCHAR(255) NOT NULL
 );
 
--- branches
-CREATE TABLE branches (
-  branch_id INT PRIMARY KEY,
-  branch_name VARCHAR(255)
+-- Subroles Table
+CREATE TABLE subroles (
+  subrole_id SERIAL PRIMARY KEY,
+  subrole_name VARCHAR(255) NOT NULL
 );
 
--- student
-CREATE TABLE student (
-  student_id INT PRIMARY KEY,
-  uuid UUID UNIQUE,
-  name VARCHAR(255),
-  email VARCHAR(255),
-  password VARCHAR(255),
-  role_id INT,
-  FOREIGN KEY (role_id) REFERENCES roles (role_id)
-);
-
--- admin
-CREATE TABLE admin_users (
-  admin_id INT PRIMARY KEY,
-  uuid UUID UNIQUE,
-  name VARCHAR(255),
-  email VARCHAR(255),
-  password VARCHAR(255),
-  role_id INT,
-  FOREIGN KEY (role_id) REFERENCES roles (role_id)
-);
-
--- faculty
-CREATE TABLE faculty (
-  faculty_id INT PRIMARY KEY,
-  uuid UUID UNIQUE,
-  name VARCHAR(255),
-  email VARCHAR(255),
-  password VARCHAR(255),
-  role_id INT,
-  branch_id INT,
-  -- try subroles
-  FOREIGN KEY (role_id) REFERENCES roles (role_id),
-  FOREIGN KEY (branch_id) REFERENCES branches (branch_id)
-);
-
--- courses
+-- Courses Table
 CREATE TABLE courses (
-  course_id INT PRIMARY KEY,
-  course_name VARCHAR(255),
-  course_cordinator VARCHAR(255),
-  branch_id INT,
-  FOREIGN KEY (branch_id) REFERENCES branches (branch_id)
+  course_id SERIAL PRIMARY KEY,
+  course_name VARCHAR(255) NOT NULL
 );
 
--- student_info
-CREATE TABLE student_info (
-  student_id INT,
+-- Branches Table
+CREATE TABLE branches (
+  branch_id SERIAL PRIMARY KEY,
+  branch_name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE groups (
+  group_id SERIAL PRIMARY KEY,
+  branch_name VARCHAR(255) NOT NULL,
+  group_name VARCHAR(255) NOT NULL
+);
+
+-- Users Table (for Admin, Student, Faculty)
+CREATE TABLE users (
+  uid SERIAL PRIMARY KEY,
+  user_id VARCHAR(255) UNIQUE NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  username VARCHAR(255) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  role_id INT,
+  FOREIGN KEY (role_id) REFERENCES roles (role_id)
+);
+
+-- Student Details Table
+CREATE TABLE student_details (
+  sid SERIAL PRIMARY KEY,
   name VARCHAR(255),
-  email VARCHAR(255),
-  phone_no VARCHAR(20),
-  branch_id INT,
-  group_no VARCHAR(255),
-  current_year INT,
-  current_sem INT,
-  FOREIGN KEY (student_id) REFERENCES student (student_id),
-  FOREIGN KEY (branch_id) REFERENCES branches (branch_id)
-);
-
--- student_course_info
-CREATE TABLE student_course_info (
-  student_id INT,
-  branch_id INT,
-  name VARCHAR(255),
-  course_id INT,
-  mentor VARCHAR(255),
-  faculty VARCHAR(255),
-  lecture_delivered INT,
-  lecture_attended INT,
-  semester INT,
-  course_cordinator VARCHAR(255),
-  FOREIGN KEY (student_id) REFERENCES student (student_id),
-  FOREIGN KEY (course_id) REFERENCES courses (course_id),
-  FOREIGN KEY (branch_id) REFERENCES branches (branch_id)
-);
-
--- student_grade_info
-CREATE TABLE student_grade_info (
-  student_id INT,
-  course_id INT,
-  exam_type VARCHAR(255),
-  grades_secured DECIMAL(5, 2),
-  total_marks DECIMAL(5, 2),
-  semester INT,
-  FOREIGN KEY (student_id) REFERENCES student (student_id),
-  FOREIGN KEY (course_id) REFERENCES courses (course_id)
-);
-
--- student_personal_info
-CREATE TABLE student_personal_info (
-  student_id INT,
-  name VARCHAR(255),
-  email VARCHAR(255),
-  phone_no VARCHAR(20),
-  branch VARCHAR(255),
-  tenth_grades VARCHAR(10),
-  twelfth_grades VARCHAR(10),
-  adhaar_no VARCHAR(12),
+  email VARCHAR(255) NOT NULL,
+  student_id VARCHAR(255) UNIQUE NOT NULL,
+  phone_number VARCHAR(20),
   guardian_name VARCHAR(255),
-  guardian_contact VARCHAR(20),
-  blood_group VARCHAR(5),
-  FOREIGN KEY (student_id) REFERENCES student (student_id)
+  guardian_email VARCHAR(255),
+  guardian_phone_number VARCHAR(20),
+  group_id INT REFERENCES groups(group_id),
+  course_name VARCHAR(255),
+  branch_name VARCHAR(255),
+  joining_session INT
 );
 
--- student_attendance_info
-CREATE TABLE student_attendance_info (
-  student_id INT,
-  course_id INT,
-  lectures_attended INT,
-  lectures_delivered INT,
-  semester INT,
-  FOREIGN KEY (student_id) REFERENCES student (student_id),
-  FOREIGN KEY (course_id) REFERENCES courses (course_id)
+-- Faculty Details Table
+CREATE TABLE faculty_details (
+  fid SERIAL PRIMARY KEY,
+  name VARCHAR(255),
+  email VARCHAR(255) NOT NULL,
+  faculty_id VARCHAR(255) UNIQUE NOT NULL,
+  phone_number VARCHAR(20),
+  subrole_id INT REFERENCES subroles(subrole_id),
+  group_id INT REFERENCES groups(group_id),
+  course_name VARCHAR(255),
+  branch_name VARCHAR(255),
+  joining_session INT
 );
