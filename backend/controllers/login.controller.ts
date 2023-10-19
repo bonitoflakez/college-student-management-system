@@ -4,9 +4,12 @@ import bcrypt from "bcryptjs";
 
 import pool from "../db/connection";
 
-/*
-TODO: Add a token verifier
- */
+interface JwtPayload {
+  id?: string;
+  exp?: number;
+  role?: string;
+  token?: string;
+}
 
 const Login = (req: Request, res: Response) => {
   const client = pool.connect();
@@ -62,7 +65,7 @@ const Login = (req: Request, res: Response) => {
              * Reference: https://github.com/auth0/node-jsonwebtoken/wiki/Migration-Notes:-v8-to-v9
              */
 
-            const token = jwt.sign(
+            const token = await jwt.sign(
               {
                 id: user.user_id,
                 role: role,
@@ -75,6 +78,11 @@ const Login = (req: Request, res: Response) => {
                 allowInvalidAsymmetricKeyTypes: true,
               }
             );
+
+            const decoded = (await jwt.verify(
+              token,
+              process.env.SECRET_KEY as Secret
+            )) as JwtPayload;
 
             // res.cookie("jwt", token, {
             //   maxAge: 1 * 24 * 60 * 60,

@@ -71,3 +71,28 @@ VALUES
   ('Chemistry', 'CH3'),
   ('Chemistry', 'CH4'),
   ('Chemistry', 'CH5');
+
+-- Insert sample data into the subjects table
+INSERT INTO
+  subjects (subject_name, course_id, branch_id)
+VALUES
+  -- Subjects for Computer Science
+  ('Introduction to Programming', 1, 1),
+  ('Data Structures and Algorithms', 1, 1),
+  ('Database Management', 1, 1),
+  ('Web Development', 1, 1),
+  -- Subjects for Electrical Engineering
+  ('Electric Circuits', 2, 2),
+  ('Digital Electronics', 2, 2),
+  ('Power Systems', 2, 2),
+  ('Control Systems', 2, 2),
+  -- Subjects for Mechanical Engineering
+  ('Mechanics of Materials', 3, 3),
+  ('Thermodynamics', 3, 3),
+  ('Fluid Mechanics', 3, 3),
+  ('Machine Design', 3, 3),
+  -- Subjects for Chemistry
+  ('Organic Chemistry', 4, 4),
+  ('Inorganic Chemistry', 4, 4),
+  ('Physical Chemistry', 4, 4),
+  ('Analytical Chemistry', 4, 4);

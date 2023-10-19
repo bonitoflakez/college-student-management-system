@@ -22,6 +22,15 @@ CREATE TABLE branches (
   branch_name VARCHAR(255) NOT NULL
 );
 
+-- Subjects Table
+CREATE TABLE subjects (
+  subject_id SERIAL PRIMARY KEY,
+  subject_name VARCHAR(255) NOT NULL,
+  course_id INT REFERENCES courses(course_id),
+  branch_id INT REFERENCES branches(branch_id)
+);
+
+-- Groups Table
 CREATE TABLE groups (
   group_id SERIAL PRIMARY KEY,
   branch_name VARCHAR(255) NOT NULL,
@@ -53,6 +62,11 @@ CREATE TABLE student_details (
   course_name VARCHAR(255),
   branch_name VARCHAR(255),
   joining_session INT
+);
+
+CREATE TABLE student_subjects (
+  student_id VARCHAR(255) REFERENCES student_details(student_id),
+  subject_id INT REFERENCES subjects(subject_id)
 );
 
 -- Faculty Details Table
