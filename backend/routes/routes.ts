@@ -5,6 +5,8 @@ import studentRoute from "./student.route";
 import facultyRoute from "./faculty.route";
 import registerRoute from "./auth.route";
 import authRoute from "./auth.route";
+import attendanceRoute from "./attendance.route";
+import gradesRoute from "./grades.route";
 
 const router = express.Router();
 
@@ -13,5 +15,7 @@ router.use("/student", studentRoute);
 router.use("/faculty", facultyRoute);
 router.use("/register", registerRoute);
 router.use("/auth", authRoute);
+router.use("/attendance", attendanceRoute);
+router.use("/grades", gradesRoute);
 
 export default router;

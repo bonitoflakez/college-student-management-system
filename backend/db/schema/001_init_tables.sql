@@ -82,3 +82,31 @@ CREATE TABLE faculty_details (
   branch_name VARCHAR(255),
   joining_session INT
 );
+
+-- Student Attendance Table
+CREATE TABLE student_attendance (
+  attendance_id SERIAL PRIMARY KEY,
+  student_id VARCHAR(255) REFERENCES student_details(student_id),
+  student_name VARCHAR(255),
+  present BOOLEAN,
+  attendance_date DATE,
+  subject_id INT REFERENCES subjects(subject_id)
+);
+
+-- Student Grades Table
+
+-- CREATE TABLE student_grades (
+--   grade_id SERIAL PRIMARY KEY,
+--   student_id VARCHAR(255) REFERENCES student_details(student_id),
+--   subject_id INT REFERENCES subjects(subject_id),
+--   max_grades INT,
+--   secured_grades INT
+-- );
+
+CREATE TABLE student_grades (
+  grade_id SERIAL PRIMARY KEY,
+  student_id VARCHAR(255) REFERENCES student_details(student_id),
+  subject_name VARCHAR(255), -- Store subject name instead of subject_id
+  max_grades INT,
+  secured_grades INT
+);
