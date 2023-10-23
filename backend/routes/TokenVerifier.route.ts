@@ -1,10 +1,10 @@
 import express from "express";
 
-import { TokeVerifierTest } from "../controllers/TokeVerifierTest.controller";
+import { TokenVerifierController } from "../controllers/TokenVerifier.controller";
 import TokenVerifier from "../middleware/TokenVerifier.middleware";
 
 const router = express.Router();
 
-router.post("/verify", TokenVerifier, TokeVerifierTest);
+router.post("/verify", TokenVerifier, TokenVerifier);
 
 export default router;

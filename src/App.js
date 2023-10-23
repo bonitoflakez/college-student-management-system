@@ -5,13 +5,13 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Attendance from "./pages/Attendance/Attendance";
 import Auth from "./pages/Auth/Auth";
 import Grades from "./pages/Grades/Grades";
-import StudentInfo from "./pages/StudentInfo/StudentInfo";
+import Info from "./pages/Info/Info";
 import NotFound from "./pages/NotFound/NotFound";
 
 function PrivateRoute({ component: Component }) {
-  const userLocalData = JSON.parse(localStorage.getItem("userData"));
+  const userLocalData = JSON.parse(localStorage.getItem("csmsUserData"));
 
-  if (!userLocalData?.id) {
+  if (!userLocalData?.authToken) {
     return <Navigate to="/auth" />;
   }
 
@@ -31,8 +31,8 @@ const App = () => {
           />
           <Route path="/grades" element={<PrivateRoute component={Grades} />} />
           <Route
-            path="/studentInfo"
-            element={<PrivateRoute component={StudentInfo} />}
+            path="/info"
+            element={<PrivateRoute component={Info} />}
           />
           <Route path="/auth" element={<Auth />} />
           {/* Add a catch-all route for unmatched URLs */}

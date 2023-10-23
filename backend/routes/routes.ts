@@ -1,6 +1,6 @@
 import express from "express";
 
-import tokeVerifierTest from "./TokeVerifierTest.route";
+import tokeVerifierTest from "./TokenVerifier.route";
 import studentRoute from "./student.route";
 import facultyRoute from "./faculty.route";
 import registerRoute from "./auth.route";

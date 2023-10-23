@@ -6,11 +6,6 @@ import { GenerateUniversityUserID } from "../helpers/userIdGenerater.helper";
 
 import pool from "../db/connection";
 
-/*
-// TODO: Add login function
-// TODO: Add user validation (check if user already exists)
-*/
-
 const AddUser = (req: Request, res: Response) => {
   const client = pool.connect();
 
@@ -78,6 +73,11 @@ const AddUser = (req: Request, res: Response) => {
 
           if (addInitialStudentDetailsResult.rowCount !== 1) {
             await client.query("ROLLBACK");
+
+            return res.status(401).json({
+              status: "Couldn't register user",
+              message: "There was some issue while registering user",
+            });
           }
         }
 
@@ -89,16 +89,19 @@ const AddUser = (req: Request, res: Response) => {
 
           if (addInitialFacultyDetailsResult.rowCount !== 1) {
             await client.query("ROLLBACK");
+
+            return res.status(401).json({
+              status: "Couldn't register user",
+              message: "There was some issue while registering user",
+            });
           }
         }
 
         await client.query("COMMIT");
 
-        // TODO: add initial faculty data
-
         return res.status(201).send({
-          status: "user registered",
-          message: {
+          message: "user registered",
+          response: {
             user_id: userID,
             username: username,
             email: email,
@@ -108,6 +111,7 @@ const AddUser = (req: Request, res: Response) => {
       } catch (err: any) {
         console.error("Error while adding user:", err.message);
         await client.query("ROLLBACK");
+
         return res.status(500).json({
           message: "Internal server error",
         });

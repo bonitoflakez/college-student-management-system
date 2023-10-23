@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./navbar.module.css";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -9,7 +10,8 @@ const Navbar = () => {
   };
 
   const logOut = () => {
-    localStorage.removeItem("userData");
+    localStorage.removeItem("csmsUserData");
+    window.location("/auth");
   };
 
   return (
@@ -18,28 +20,28 @@ const Navbar = () => {
         <div className="text-white text-xl font-bold">XYZ University</div>
 
         <div className="hidden md:flex space-x-4">
-          <a href="/" className={`font-bold ${styles.nav_font}`}>
+          <Link to="/" className={`font-bold ${styles.nav_font}`}>
             Dashboard
-          </a>
-          <a href="/attendance" className={`font-bold ${styles.nav_font}`}>
+          </Link>
+          <Link to="/attendance" className={`font-bold ${styles.nav_font}`}>
             Attendance
-          </a>
-          <a href="/grades" className={`font-bold ${styles.nav_font}`}>
+          </Link>
+          <Link to="/grades" className={`font-bold ${styles.nav_font}`}>
             Grades
-          </a>
-          <a href="/studentInfo" className={`font-bold ${styles.nav_font}`}>
-            Student Info
-          </a>
-          <a href="/auth" className={`font-bold ${styles.nav_font}`}>
+          </Link>
+          <Link to="/info" className={`font-bold ${styles.nav_font}`}>
+            Info
+          </Link>
+          <Link to="/auth" className={`font-bold ${styles.nav_font}`}>
             Login/Signup
-          </a>
-          <a
-            href="/auth"
+          </Link>
+          <Link
+            to="/auth"
             className={`font-bold ${styles.nav_font}`}
             onClick={logOut}
           >
             Logout
-          </a>
+          </Link>
         </div>
 
         <div className="md:hidden">
@@ -67,40 +69,40 @@ const Navbar = () => {
             <div
               className={`absolute top-16 right-0 bg-white p-4 mt-2 rounded shadow-md`}
             >
-              <a
-                href="/"
+              <Link
+                to="/"
                 className={`block font-semibold mb-2 ${styles.nav_mob_link_font}`}
               >
                 Dashboard
-              </a>
-              <a
-                href="/attendance"
+              </Link>
+              <Link
+                to="/attendance"
                 className={`block font-semibold mb-2 ${styles.nav_mob_link_font}`}
               >
                 Attendance
-              </a>
-              <a
-                href="/grades"
+              </Link>
+              <Link
+                to="/grades"
                 className={`block font-semibold mb-2 ${styles.nav_mob_link_font}`}
               >
                 Grades
-              </a>
-              <a
-                href="/studentInfo"
+              </Link>
+              <Link
+                to="/info"
                 className={`block font-semibold mb-2 ${styles.nav_mob_link_font}`}
               >
-                Student Info
-              </a>
-              <a href="/auth" className={`font-bold ${styles.nav_font}`}>
+                Info
+              </Link>
+              <Link to="/auth" className={`font-bold ${styles.nav_font}`}>
                 Login/Signup
-              </a>
-              <a
-                href="/auth"
+              </Link>
+              <Link
+                to="/auth"
                 className={`font-bold ${styles.nav_font}`}
                 onClick={logOut}
               >
                 Logout
-              </a>
+              </Link>
             </div>
           )}
         </div>

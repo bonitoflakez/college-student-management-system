@@ -1,75 +1,142 @@
 import { useState } from "react";
 import styles from "./auth.module.css";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Auth = () => {
-  const [isStudent, setIsStudent] = useState(true);
   const [isRegistering, setIsRegistering] = useState(true);
-  const [formData, setFormData] = useState({
-    id: "",
-    name: "",
-    email: "",
+
+  // Separate states for registration and login data
+  const [registrationData, setRegistrationData] = useState({
+    username: "",
     password: "",
-    branch: "",
-    session: "",
-    role: "",
+    email: "",
+    role: "Student",
   });
 
-  const toggleUserType = () => {
-    setIsStudent(!isStudent);
-  };
+  const [loginData, setLoginData] = useState({
+    userId: "",
+    password: "",
+  });
+
+  const navigate = useNavigate();
 
   const toggleRegistration = () => {
     setIsRegistering(!isRegistering);
+
+    // Reset input fields when switching forms
+    // setRegistrationData({
+    //   username: "",
+    //   password: "",
+    //   email: "",
+    //   role: "Student",
+    // });
+
+    // setLoginData({
+    //   userId: "",
+    //   password: "",
+    // });
   };
 
-  const handleChange = (e) => {
+  const handleRegistrationChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setRegistrationData({
+      ...registrationData,
       [name]: value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleLoginChange = (e) => {
+    const { name, value } = e.target;
+    setLoginData({
+      ...loginData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!isStudent) {
-      formData.role = "faculty";
-    } else {
-      formData.role = "student";
-    }
-
-    // Check if any of the required fields are empty
-    if (!formData.email || !formData.password || !formData.id) {
-      toast.error("Invalid data in input fields.");
-      return;
-    }
-
     if (isRegistering) {
-      localStorage.setItem("userData", JSON.stringify(formData));
-      toast.success("Registered successfully!");
-    } else {
-      const storedData = localStorage.getItem("userData");
-      if (storedData) {
-        const storedUser = JSON.parse(storedData);
-        if (
-          storedUser.email === formData.email &&
-          storedUser.password === formData.password
-        ) {
-          console.log("Login successful");
-          toast.success("Login successful!");
-          <Navigate to={"/"} />;
+      // Handle registration
+      // Check if any of the required fields are empty
+      if (
+        !registrationData.username ||
+        !registrationData.password ||
+        !registrationData.email
+      ) {
+        toast.error("Invalid data in input fields.");
+        return;
+      }
+
+      try {
+        const response = await axios.post(
+          "http://localhost:8000/api/auth/register",
+          registrationData,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (response.status === 201) {
+          const responseData = response.data;
+
+          toast.success(
+            `${responseData.message} - ID: ${response.data.response.userId}`
+          );
         } else {
-          console.log("Invalid login credentials");
+          toast.error("Registration failed");
+        }
+      } catch (error) {
+        toast.error(
+          error.response.data.message || "Error while registering this user"
+        );
+      }
+    } else {
+      // Handle login
+      // Check if any of the required fields are empty
+      if (!loginData.userId || !loginData.password) {
+        toast.error("Invalid data in input fields.");
+        return;
+      }
+
+      let data = {
+        user_id: loginData.userId,
+        password: loginData.password,
+      };
+
+      try {
+        const response = await axios.post(
+          "http://localhost:8000/api/auth/login",
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (response.status === 201) {
+          const responseData = response.data;
+
+          // If logged in successfully then store response data in localstorage
+          localStorage.setItem(
+            "csmsUserData",
+            JSON.stringify(responseData.info)
+          );
+
+          toast.success(`${responseData.message}`);
+
+          navigate("/");
+        } else {
           toast.error("Invalid login credentials");
         }
-      } else {
-        console.log("User not registered");
-        toast.error("User not registered");
+      } catch (error) {
+        toast.error(error.response.data.message || "Error while loggin in");
       }
     }
   };
@@ -78,79 +145,69 @@ const Auth = () => {
     <div className="container mx-auto pt-10 flex justify-center items-center">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <h2 className="font-bold text-xl text-center">
-          {isRegistering ? "Registration" : "Login"} (
-          {isStudent ? "Student" : "Faculty"})
+          {isRegistering ? "Registration" : "Login"}
         </h2>
         <form onSubmit={handleSubmit}>
           {isRegistering && (
             <>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
-                  {"Name*"}
+                  Username*
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  name="name"
+                  name="username"
                   type="text"
-                  placeholder={"Name"}
-                  value={formData.name}
-                  onChange={handleChange}
+                  placeholder="Username"
+                  value={registrationData.username}
+                  onChange={handleRegistrationChange}
                 />
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Branch*
+                  Email*
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  name="branch"
-                  type="text"
-                  placeholder="Branch"
-                  value={formData.branch}
-                  onChange={handleChange}
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  value={registrationData.email}
+                  onChange={handleRegistrationChange}
                 />
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Session*
+                  Role*
                 </label>
-                <input
+                <select
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  name="session"
-                  type="text"
-                  placeholder="Session"
-                  value={formData.session}
-                  onChange={handleChange}
-                />
+                  name="role"
+                  value={registrationData.role}
+                  onChange={handleRegistrationChange}
+                >
+                  <option value="Student">Student</option>
+                  <option value="Faculty">Faculty</option>
+                  <option value="Admin">Admin</option>
+                </select>
               </div>
             </>
           )}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              {"ID*"}
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              name={"id"}
-              type="text"
-              placeholder={"ID*"}
-              value={formData.id}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Email*
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              name="email"
-              type="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </div>
+          {!isRegistering && (
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                User ID*
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                name="userId"
+                type="text"
+                placeholder="User ID"
+                value={loginData.userId}
+                onChange={handleLoginChange}
+              />
+            </div>
+          )}
           <div className="mb-6">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Password*
@@ -160,8 +217,12 @@ const Auth = () => {
               name="password"
               type="password"
               placeholder="********"
-              value={formData.password}
-              onChange={handleChange}
+              value={
+                isRegistering ? registrationData.password : loginData.password
+              }
+              onChange={
+                isRegistering ? handleRegistrationChange : handleLoginChange
+              }
             />
           </div>
           <div className="flex items-center justify-between">
@@ -170,15 +231,6 @@ const Auth = () => {
               type="submit"
             >
               {isRegistering ? "Register" : "Login"}
-            </button>
-            <button
-              className={`inline-block align-baseline font-bold text-sm ${styles.txt}`}
-              type="button"
-              onClick={toggleUserType}
-            >
-              <p className="px-2">
-                {isStudent ? "Switch to Faculty" : "Switch to Student"}
-              </p>
             </button>
             <button
               className={`inline-block align-baseline font-bold text-sm ${styles.txt}`}

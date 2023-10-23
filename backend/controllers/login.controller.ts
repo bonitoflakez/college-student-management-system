@@ -90,20 +90,20 @@ const Login = (req: Request, res: Response) => {
             // });
 
             res.status(201).json({
-              status: "authorized",
-              email: user.email,
-              user_id: user.user_id,
-              authToken: token,
+              message: `Logged in as ${user_id}`,
+              info: {
+                email: user.email,
+                user_id: user.user_id,
+                authToken: token,
+              },
             });
           } else {
             res.status(401).json({
-              status: "unauthorized",
               message: "Invalid password",
             });
           }
         } else {
           res.status(401).json({
-            status: "unauthorized",
             message: "Invalid user data",
           });
         }

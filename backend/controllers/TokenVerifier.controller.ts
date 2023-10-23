@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-const TokeVerifierTest = (req: Request, res: Response) => {
+const TokenVerifierController = (req: Request, res: Response) => {
   const user_id = req.user_id;
 
   res.status(200).json({
@@ -8,4 +8,4 @@ const TokeVerifierTest = (req: Request, res: Response) => {
   });
 };
 
-export { TokeVerifierTest };
+export { TokenVerifierController };
