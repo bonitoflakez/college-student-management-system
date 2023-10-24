@@ -86,7 +86,7 @@ const Auth = () => {
           const responseData = response.data;
 
           toast.success(
-            `${responseData.message} - ID: ${response.data.response.userId}`
+            `${responseData.message} - ID: ${response.data.response.user_id}`
           );
         } else {
           toast.error("Registration failed");

@@ -20,16 +20,13 @@ const Navbar = () => {
         <div className="text-white text-xl font-bold">XYZ University</div>
 
         <div className="hidden md:flex space-x-4">
-          <Link to="/" className={`font-bold ${styles.nav_font}`}>
-            Dashboard
-          </Link>
           <Link to="/attendance" className={`font-bold ${styles.nav_font}`}>
             Attendance
           </Link>
           <Link to="/grades" className={`font-bold ${styles.nav_font}`}>
             Grades
           </Link>
-          <Link to="/info" className={`font-bold ${styles.nav_font}`}>
+          <Link to="/" className={`font-bold ${styles.nav_font}`}>
             Info
           </Link>
           <Link to="/auth" className={`font-bold ${styles.nav_font}`}>
@@ -70,12 +67,6 @@ const Navbar = () => {
               className={`absolute top-16 right-0 bg-white p-4 mt-2 rounded shadow-md`}
             >
               <Link
-                to="/"
-                className={`block font-semibold mb-2 ${styles.nav_mob_link_font}`}
-              >
-                Dashboard
-              </Link>
-              <Link
                 to="/attendance"
                 className={`block font-semibold mb-2 ${styles.nav_mob_link_font}`}
               >
@@ -88,7 +79,7 @@ const Navbar = () => {
                 Grades
               </Link>
               <Link
-                to="/info"
+                to="/"
                 className={`block font-semibold mb-2 ${styles.nav_mob_link_font}`}
               >
                 Info

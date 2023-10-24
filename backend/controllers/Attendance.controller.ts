@@ -11,6 +11,18 @@ const Attendance = (req: Request, res: Response) => {
   const { student_id, student_name, present, attendance_date, subject_id } =
     req.body;
 
+  if (
+    !student_id ||
+    !student_name ||
+    !present ||
+    !attendance_date ||
+    !subject_id
+  ) {
+    return res.status(500).json({
+      message: "Please fill all the input details",
+    });
+  }
+
   client
     .then(async (client) => {
       try {

@@ -1,7 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 
 import Navbar from "./components/Navbar/Navbar";
-import Dashboard from "./pages/Dashboard/Dashboard";
 import Attendance from "./pages/Attendance/Attendance";
 import Auth from "./pages/Auth/Auth";
 import Grades from "./pages/Grades/Grades";
@@ -24,16 +23,12 @@ const App = () => {
       <Navbar />
       <main>
         <Routes>
-          <Route path="/" element={<PrivateRoute component={Dashboard} />} />
           <Route
             path="/attendance"
             element={<PrivateRoute component={Attendance} />}
           />
+          <Route path="/" element={<PrivateRoute component={Info} />} />
           <Route path="/grades" element={<PrivateRoute component={Grades} />} />
-          <Route
-            path="/info"
-            element={<PrivateRoute component={Info} />}
-          />
           <Route path="/auth" element={<Auth />} />
           {/* Add a catch-all route for unmatched URLs */}
           <Route path="*" element={<NotFound />} />

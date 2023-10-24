@@ -93,16 +93,6 @@ CREATE TABLE student_attendance (
   subject_id INT REFERENCES subjects(subject_id)
 );
 
--- Student Grades Table
-
--- CREATE TABLE student_grades (
---   grade_id SERIAL PRIMARY KEY,
---   student_id VARCHAR(255) REFERENCES student_details(student_id),
---   subject_id INT REFERENCES subjects(subject_id),
---   max_grades INT,
---   secured_grades INT
--- );
-
 CREATE TABLE student_grades (
   grade_id SERIAL PRIMARY KEY,
   student_id VARCHAR(255) REFERENCES student_details(student_id),

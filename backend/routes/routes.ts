@@ -7,6 +7,7 @@ import registerRoute from "./auth.route";
 import authRoute from "./auth.route";
 import attendanceRoute from "./attendance.route";
 import gradesRoute from "./grades.route";
+import defaultFetcher from './defaultFetcher.rotue';
 
 const router = express.Router();
 
@@ -17,5 +18,6 @@ router.use("/register", registerRoute);
 router.use("/auth", authRoute);
 router.use("/attendance", attendanceRoute);
 router.use("/grades", gradesRoute);
+router.use("/fetch", defaultFetcher);
 
 export default router;

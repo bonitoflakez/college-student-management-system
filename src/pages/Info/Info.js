@@ -79,6 +79,27 @@ const Info = () => {
     fetchData();
   }, [userLocalData.authToken]);
 
+  const [courses, setCourses] = useState([]);
+  const [branches, setBranches] = useState([]);
+  const [groups, setGroups] = useState([]);
+
+  useEffect(() => {
+    // Fetch course names
+    axios.get("http://localhost:8000/api/fetch/course").then((courseRes) => {
+      setCourses(courseRes.data.resData);
+    });
+
+    // Fetch branch names
+    axios.get("http://localhost:8000/api/fetch/branch").then((branchRes) => {
+      setBranches(branchRes.data.resData);
+    });
+
+    // Fetch group names
+    axios.get("http://localhost:8000/api/fetch/group").then((groupRes) => {
+      setGroups(groupRes.data.resData);
+    });
+  }, []);
+
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -95,7 +116,7 @@ const Info = () => {
         {
           student_id: formData.student_id,
         },
-        { 
+        {
           headers: {
             Authorization: `Bearer ${userLocalData.authToken}`,
           },
@@ -103,8 +124,6 @@ const Info = () => {
       );
 
       setStudent(response.data.resData[0]);
-
-      console.log(response);
     } catch (error) {
       console.error(error);
       // Handle errors
@@ -120,10 +139,9 @@ const Info = () => {
   };
 
   const handleSaveStudentDetails = async () => {
-    // Implement the logic to add student details based on formData
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/add-student-details",
+        "http://localhost:8000/api/student/add-details",
         formData,
         {
           headers: {
@@ -132,10 +150,13 @@ const Info = () => {
         }
       );
 
+      if (response.status === 200) {
+        toast.success("Successfully added student data");
+      }
+
       closeAddStudentDetailsModal();
     } catch (error) {
       console.error(error);
-      // Handle errors
     }
   };
 
@@ -173,16 +194,120 @@ const Info = () => {
               contentLabel="Add Student Details Modal"
             >
               {/* Input fields for adding student details */}
-              {/* Include dropdowns for branch_name, course_name, etc. */}
-              <input
-                type="text"
-                name="name"
-                placeholder="Name"
-                value={formData.name}
+              <div>
+                Student Name:
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  value={formData.name}
+                  onChange={handleFormChange}
+                  className="outline-none border px-2 py-1 rounded-sm m-2"
+                />
+              </div>
+
+              <div>
+                Student Phone Number:
+                <input
+                  type="text"
+                  name="phone_number"
+                  placeholder="Phone Number"
+                  value={formData.phone_number}
+                  onChange={handleFormChange}
+                  className="outline-none border px-2 py-1 rounded-sm m-2"
+                />
+              </div>
+
+              <div>
+                Guardian Name:
+                <input
+                  type="text"
+                  name="guardian_name"
+                  placeholder="Guardian Name"
+                  value={formData.guardian_name}
+                  onChange={handleFormChange}
+                  className="outline-none border px-2 py-1 rounded-sm m-2"
+                />
+              </div>
+
+              <div>
+                Guardian Email:
+                <input
+                  type="text"
+                  name="guardian_email"
+                  placeholder="Guardian Email"
+                  value={formData.guardian_email}
+                  onChange={handleFormChange}
+                  className="outline-none border px-2 py-1 rounded-sm m-2"
+                />
+              </div>
+
+              <div>
+                Guardian Phone Number:
+                <input
+                  type="text"
+                  name="guardian_phone_number"
+                  placeholder="Guardian Phone Number"
+                  value={formData.guardian_phone_number}
+                  onChange={handleFormChange}
+                  className="outline-none border px-2 py-1 rounded-sm m-2"
+                />
+              </div>
+
+              <div>
+                Joining Session:
+                <input
+                  type="text"
+                  name="joining_session"
+                  placeholder="Joining Session"
+                  value={formData.joining_session}
+                  onChange={handleFormChange}
+                  className="outline-none border px-2 py-1 rounded-sm m-2"
+                />
+              </div>
+
+              <select
+                name="course_name"
+                value={formData.course_name}
                 onChange={handleFormChange}
-                className="outline-none border px-2 py-1 rounded-sm"
-              />
-              {/* Include other input fields for faculty/admin here */}
+                className="outline-none border px-2 py-1 rounded-sm mx-2"
+              >
+                <option value="">Select Course</option>
+                {courses.map((course) => (
+                  <option key={course.course_id} value={course.course_name}>
+                    {course.course_name}
+                  </option>
+                ))}
+              </select>
+
+              <select
+                name="branch_name"
+                value={formData.branch_name}
+                onChange={handleFormChange}
+                className="outline-none border px-2 py-1 rounded-sm mx-2"
+              >
+                <option value="">Select Branch</option>
+                {branches.map((branch) => (
+                  <option key={branch.branch_id} value={branch.branch_name}>
+                    {branch.branch_name}
+                  </option>
+                ))}
+              </select>
+
+              <select
+                name="group_id"
+                value={formData.group_id}
+                onChange={handleFormChange}
+                className="outline-none border px-2 py-1 rounded-sm mx-2"
+              >
+                <option value="">Select Group</option>
+                {groups.map((group) => (
+                  <option key={group.group_id} value={group.group_id}>
+                    {group.group_name}
+                  </option>
+                ))}
+              </select>
+
               <button
                 className="border px-2 py-1 rounded-sm"
                 onClick={handleSaveStudentDetails}
@@ -237,16 +362,6 @@ const Info = () => {
           <span className="font-bold">Branch Name:</span>{" "}
           {student?.branch_name || "Not available"}
         </p>
-        <p className="text-gray-600">
-          <span className="font-bold">Current Subjects:</span>
-        </p>
-        <ul className="list-disc pl-6">
-          {/* {student?.currentSubjects.map((subject) => (
-            <li key={subject.courseId} className="text-gray-600">
-              {subject.subjectName} ({subject.courseId})
-            </li>
-          ))} */}
-        </ul>
         <hr />
         <p className="text-gray-600">
           <span className="font-bold">Guardian Name:</span>{" "}
